@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="uz" data-theme="light" data-page-title="titles.stats">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tizim Statistikasi - LevelX</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/levels-colors.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  
+  <!-- Chart.js from CDN for premium charts rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  
+  <!-- Core JS scripts -->
+  <script src="../js/theme-toggle.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/stats.js" defer></script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">EN</div>
+        <span>LevelX</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html" data-i18n="nav.home"></a></li>
+          <li><a href="levels.html" data-i18n="nav.levels"></a></li>
+          <li><a href="stats.html" class="active" data-i18n="nav.stats"></a></li>
+          <li class="admin-only" style="display: none;"><a href="admin.html" data-i18n="nav.admin"></a></li>
+        </ul>
+      </nav>
+      
+      <div class="nav-actions">
+        <div class="lang-switcher" data-lang-switcher>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+        <button class="theme-toggle" aria-label="Mavzuni o'zgartirish / Change theme / Сменить тему"></button>
+        <div id="auth-buttons-container">
+          <a href="auth.html" class="btn btn-secondary btn-sm" data-i18n="nav.login"></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="margin-top: 30px; margin-bottom: 50px;">
+    <div class="animate-fade-in">
+      
+      <!-- Page Header -->
+      <div style="text-align: center; margin-bottom: 40px;">
+        <h1>Tizim Ko'rsatkichlari & Statistika</h1>
+        <p style="color: var(--text-secondary);">Barcha test topshiruvchilar va ularning natijalari bo'yicha umumlashtirilgan tahlillar</p>
+      </div>
+
+      <!-- Quick Metrics Summary Widgets -->
+      <div class="stats-summary">
+        <!-- Metric 1: Total Users -->
+        <div class="card stat-widget">
+          <div class="stat-val" id="stat-total-users">0</div>
+          <div class="stat-lbl">Ro'yxatdan o'tganlar</div>
+        </div>
+        <!-- Metric 2: Total Tests Taken -->
+        <div class="card stat-widget">
+          <div class="stat-val" id="stat-total-tests">0</div>
+          <div class="stat-lbl">Topshirilgan testlar</div>
+        </div>
+        <!-- Metric 3: Average Score -->
+        <div class="card stat-widget">
+          <div class="stat-val" id="stat-avg-score">0 / 30</div>
+          <div class="stat-lbl">O'rtacha natija (Ball)</div>
+        </div>
+        <!-- Metric 4: Popular Level -->
+        <div class="card stat-widget">
+          <div class="stat-val" id="stat-common-level" style="color: var(--accent);">A1</div>
+          <div class="stat-lbl">Eng ko'p uchraydigan daraja</div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="grid-2" style="margin-top: 30px;">
+        
+        <!-- Chart 1: CEFR Level Distribution -->
+        <div class="card">
+          <h3 style="margin-bottom: 15px;">Foydalanuvchilar Darajasi Taqsimoti</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 15px;">Ro'yxatdan o'tgan test topshiruvchilarning CEFR darajalari bo'yicha taqsimoti</p>
+          <div class="chart-card">
+            <canvas id="levelDistributionChart"></canvas>
+            <div id="no-dist-data-message" style="display: none; color: var(--text-muted); font-weight: 500;">
+              Tahlil qilish uchun tizimda test natijalari mavjud emas.
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 2: Average score by section -->
+        <div class="card">
+          <h3 style="margin-bottom: 15px;">Yo'nalishlar Bo'yicha O'rtacha Ko'rsatkich</h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 15px;">Grammatika, so'z boyligi va o'qish bo'limlarining o'rtacha foiz o'zlashtirilishi</p>
+          <div class="chart-card">
+            <canvas id="sectionsAverageChart"></canvas>
+            <div id="no-sec-data-message" style="display: none; color: var(--text-muted); font-weight: 500;">
+              Tahlil qilish uchun tizimda test natijalari mavjud emas.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2026 LevelX Project. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+

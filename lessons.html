@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark" data-page-title="titles.lessons">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Darslar — LevelX</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/levels-colors.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  <link rel="stylesheet" href="../css/lessons.css">
+  <script src="../js/theme-toggle.js" defer></script>
+  <script src="../js/questions-data.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/lessons-data.js" defer></script>
+  <script src="../js/lessons.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="container navbar">
+    <a href="../index.html" class="logo">
+      <div class="logo-icon">EN</div><span>LevelX</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-i18n="nav.home"></a></li>
+        <li><a href="lessons.html" class="active" data-i18n="nav.lessons"></a></li>
+        <li><a href="teachers.html" data-i18n="nav.teachers"></a></li>
+        <li><a href="levels.html" data-i18n="nav.levels"></a></li>
+        <li><a href="stats.html" data-i18n="nav.stats"></a></li>
+        <li class="admin-only" style="display:none"><a href="admin.html" data-i18n="nav.admin"></a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-switcher" data-lang-switcher>
+        <button class="lang-btn" data-lang="uz">UZ</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+      </div>
+      <button class="theme-toggle" aria-label="Toggle theme"></button>
+      <div id="auth-buttons-container"></div>
+    </div>
+  </div>
+</header>
+
+<main class="container lessons-main">
+
+  <!-- Hero -->
+  <div class="lessons-hero reveal">
+    <div class="lessons-hero-text">
+      <span class="section-kicker">🎬 Video Darslar</span>
+      <h1>Premium Ingliz tili <span class="gradient-text">Darslar kutubxonasi</span></h1>
+      <p>Azam Qahramoniy, NSFLA Multilevel Hub va Abdulloh John Ruziev kanallaridan tanlangan eng yaxshi darslar.</p>
+    </div>
+    <div class="lessons-hero-stats">
+      <div class="hero-stat-card glass-card">
+        <span class="hero-stat-num" id="stat-total-lessons">0</span>
+        <span>Jami darslar</span>
+      </div>
+      <div class="hero-stat-card glass-card">
+        <span class="hero-stat-num" id="stat-total-teachers">3</span>
+        <span>O'qituvchilar</span>
+      </div>
+      <div class="hero-stat-card glass-card">
+        <span class="hero-stat-num" id="stat-completed">0</span>
+        <span>Tugatilgan</span>
+      </div>
+      <div class="hero-stat-card glass-card">
+        <span class="hero-stat-num streak-num" id="stat-streak">0🔥</span>
+        <span>Kunlik streak</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Continue Watching -->
+  <section class="lessons-section" id="continue-section" style="display:none">
+    <div class="section-header">
+      <h2>▶ Davom ettirish</h2>
+      <a href="#" class="see-all-link" id="see-all-continue">Hammasini ko'rish →</a>
+    </div>
+    <div class="lessons-scroll-row" id="continue-row"></div>
+  </section>
+
+  <!-- Favorites -->
+  <section class="lessons-section" id="favorites-section" style="display:none">
+    <div class="section-header">
+      <h2>❤️ Sevimlilar</h2>
+      <a href="#" class="see-all-link" id="see-all-favorites">Hammasini ko'rish →</a>
+    </div>
+    <div class="lessons-scroll-row" id="favorites-row"></div>
+  </section>
+
+  <!-- Filter Bar -->
+  <div class="lessons-filter-bar glass-card reveal">
+    <div class="filter-search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" id="lessons-search" class="lessons-search-input" placeholder="Dars qidirish...">
+      <button class="search-clear-btn" id="search-clear" style="display:none">✕</button>
+    </div>
+
+    <div class="filter-chips-row">
+      <div class="filter-group">
+        <span class="filter-label">Daraja</span>
+        <div class="chip-group" id="level-filters">
+          <button class="filter-chip active" data-filter="level" data-value="all">Hammasi</button>
+          <button class="filter-chip lvl-chip-A1" data-filter="level" data-value="A1">A1</button>
+          <button class="filter-chip lvl-chip-A2" data-filter="level" data-value="A2">A2</button>
+          <button class="filter-chip lvl-chip-B1" data-filter="level" data-value="B1">B1</button>
+          <button class="filter-chip lvl-chip-B2" data-filter="level" data-value="B2">B2</button>
+          <button class="filter-chip lvl-chip-C1" data-filter="level" data-value="C1">C1</button>
+          <button class="filter-chip lvl-chip-C2" data-filter="level" data-value="C2">C2</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Ko'nikma</span>
+        <div class="chip-group" id="skill-filters">
+          <button class="filter-chip active" data-filter="skill" data-value="all">Hammasi</button>
+          <button class="filter-chip" data-filter="skill" data-value="grammar">📝 Grammatika</button>
+          <button class="filter-chip" data-filter="skill" data-value="vocabulary">📖 Lug'at</button>
+          <button class="filter-chip" data-filter="skill" data-value="speaking">🗣 Gapirish</button>
+          <button class="filter-chip" data-filter="skill" data-value="listening">👂 Tinglash</button>
+          <button class="filter-chip" data-filter="skill" data-value="reading">📰 O'qish</button>
+          <button class="filter-chip" data-filter="skill" data-value="writing">✍️ Yozish</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">O'qituvchi</span>
+        <div class="chip-group" id="teacher-filters">
+          <button class="filter-chip active" data-filter="teacher" data-value="all">Hammasi</button>
+          <button class="filter-chip" data-filter="teacher" data-value="UCazamqahramoniy">👨‍🏫 Azam</button>
+          <button class="filter-chip" data-filter="teacher" data-value="UCnsflamultilevelhub">🎓 NSFLA</button>
+          <button class="filter-chip" data-filter="teacher" data-value="UCabdulloh_john_ruziev">📚 Abdulloh</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <span class="filter-label">Saralash</span>
+        <select class="filter-select" id="sort-select">
+          <option value="newest">Eng yangi</option>
+          <option value="popular">Eng mashhur</option>
+          <option value="az">A → Z</option>
+          <option value="level-asc">Daraja: A1 → C2</option>
+          <option value="level-desc">Daraja: C2 → A1</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-results-info">
+      <span id="results-count">0 dars topildi</span>
+      <button class="reset-filters-btn" id="reset-filters">Filterni tozalash</button>
+    </div>
+  </div>
+
+  <!-- Main Lessons Grid -->
+  <section class="lessons-section">
+    <div class="lessons-grid" id="lessons-grid">
+      <!-- Skeleton loaders -->
+      <div class="lesson-card-skeleton glass-card" id="sk1"></div>
+      <div class="lesson-card-skeleton glass-card" id="sk2"></div>
+      <div class="lesson-card-skeleton glass-card" id="sk3"></div>
+      <div class="lesson-card-skeleton glass-card" id="sk4"></div>
+      <div class="lesson-card-skeleton glass-card" id="sk5"></div>
+      <div class="lesson-card-skeleton glass-card" id="sk6"></div>
+    </div>
+    <div class="lessons-empty" id="lessons-empty" style="display:none">
+      <div class="empty-icon">🔍</div>
+      <h3>Hech narsa topilmadi</h3>
+      <p>Boshqa kalit so'z yoki filtr sinab ko'ring.</p>
+      <button class="btn btn-primary" id="clear-search-btn">Filterni tozalash</button>
+    </div>
+  </section>
+
+  <!-- Certificate Progress -->
+  <section class="lessons-section cert-progress-section glass-card reveal" id="cert-section">
+    <h2>🏆 Sertifikat progressi</h2>
+    <div class="cert-levels-grid" id="cert-levels-grid"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-content">
+    <div class="logo">
+      <div class="logo-icon" style="width:30px;height:30px;font-size:1rem">EN</div>
+      <span>LevelX</span>
+    </div>
+    <p>&copy; 2026 LevelX Project. <span data-i18n="hero.footer"></span></p>
+    <ul class="footer-links">
+      <li><a href="../index.html">Bosh sahifa</a></li>
+      <li><a href="lessons.html">Darslar</a></li>
+      <li><a href="teachers.html">O'qituvchilar</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

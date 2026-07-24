@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="uz" data-theme="light" data-page-title="titles.auth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tizimga kirish / Ro'yxatdan o'tish - LevelX</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/levels-colors.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  
+  <!-- Core JS scripts -->
+  <script src="../js/theme-toggle.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/auth.js" defer></script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">EN</div>
+        <span>LevelX</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html" data-i18n="nav.home"></a></li>
+          <li><a href="levels.html" data-i18n="nav.levels"></a></li>
+          <li><a href="stats.html" data-i18n="nav.stats"></a></li>
+        </ul>
+      </nav>
+      
+      <div class="nav-actions">
+        <div class="lang-switcher" data-lang-switcher>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+        <button class="theme-toggle" aria-label="Mavzuni o'zgartirish / Change theme / Сменить тему"></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="auth-container animate-fade-in">
+      <div class="card">
+        
+        <!-- Tab Switchers -->
+        <div class="auth-tabs">
+          <div class="auth-tab active" id="tab-login" onclick="switchTab('login')" data-i18n="auth.loginTab"></div>
+          <div class="auth-tab" id="tab-signup" onclick="switchTab('signup')" data-i18n="auth.signupTab"></div>
+        </div>
+
+        <!-- Feedback Alert -->
+        <div id="auth-alert" style="display: none; padding: 12px; border-radius: var(--border-radius-md); margin-bottom: 20px; font-weight: 500;"></div>
+
+        <!-- 1. LOGIN FORM PANEL -->
+        <div class="auth-form-panel active" id="panel-login">
+          <form id="form-login" onsubmit="handleLogin(event)">
+            <div class="form-group">
+              <label for="login-email" data-i18n="auth.email"></label>
+              <input type="email" id="login-email" class="form-control" placeholder="example@mail.com" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="login-password" data-i18n="auth.password"></label>
+              <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;" data-i18n="auth.loginButton"></button>
+          </form>
+          
+          <div style="margin-top: 15px; text-align: center; font-size: 0.9rem; color: var(--text-secondary);">
+            <span data-i18n="auth.noAccount"></span> <a href="#" onclick="switchTab('signup')" data-i18n="auth.signupButton"></a>
+          </div>
+        </div>
+
+        <!-- 2. REGISTRATION FORM PANEL -->
+        <div class="auth-form-panel" id="panel-signup">
+          <form id="form-signup" onsubmit="handleSignup(event)">
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="signup-firstname" data-i18n="auth.firstName"></label>
+                <input type="text" id="signup-firstname" class="form-control" placeholder="Ali" required>
+              </div>
+              <div class="form-group">
+                <label for="signup-lastname" data-i18n="auth.lastName"></label>
+                <input type="text" id="signup-lastname" class="form-control" placeholder="Valiyev" required>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label for="signup-email" data-i18n="auth.email"></label>
+                <input type="email" id="signup-email" class="form-control" placeholder="ali@mail.com" required>
+              </div>
+              <div class="form-group">
+                <label for="signup-age" data-i18n="auth.age"></label>
+                <input type="number" id="signup-age" class="form-control" placeholder="20" min="5" max="120" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="signup-password" data-i18n="auth.password"></label>
+              <input type="password" id="signup-password" class="form-control" placeholder="Kamida 6 ta belgi" minlength="6" required>
+            </div>
+
+            <!-- Avatar Selection -->
+            <div class="form-group">
+              <label data-i18n="auth.avatar"></label>
+              <div class="avatar-selector">
+                <div class="avatar-option selected" data-avatar="avatar_1" onclick="selectAvatar('avatar_1')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-b1);">👤</div>
+                </div>
+                <div class="avatar-option" data-avatar="avatar_2" onclick="selectAvatar('avatar_2')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-a2);">🧑</div>
+                </div>
+                <div class="avatar-option" data-avatar="avatar_3" onclick="selectAvatar('avatar_3')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-b2);">👩‍💻</div>
+                </div>
+                <div class="avatar-option" data-avatar="avatar_4" onclick="selectAvatar('avatar_4')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-c1);">🧑‍🎓</div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 15px;" data-i18n="auth.signupButton"></button>
+          </form>
+          
+          <div style="margin-top: 15px; text-align: center; font-size: 0.9rem; color: var(--text-secondary);">
+            <span data-i18n="auth.haveAccount"></span> <a href="#" onclick="switchTab('login')" data-i18n="auth.loginButton"></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2026 LevelX Project. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+  <style>
+    /* Styling for the avatars selector since there are no images */
+    .avatar-img-placeholder {
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</body>
+</html>
+

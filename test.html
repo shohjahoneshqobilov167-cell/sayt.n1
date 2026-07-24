@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="uz" data-theme="light" data-page-title="titles.test">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Test - Ingliz tili testi</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/levels-colors.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  
+  <!-- Core JS scripts -->
+  <script src="../js/theme-toggle.js" defer></script>
+  <script src="../js/questions-data.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/test.js" defer></script>
+</head>
+<body>
+
+  <!-- Navigation Header (Compact for Test environment) -->
+  <header>
+    <div class="container navbar">
+      <div class="logo">
+        <div class="logo-icon">EN</div>
+        <span>LevelX</span>
+      </div>
+      <div class="nav-actions">
+        <div class="lang-switcher" data-lang-switcher>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+        <button class="theme-toggle" aria-label="Mavzuni o'zgartirish / Change theme / Сменить тему"></button>
+        <button onclick="triggerFinishConfirmation()" class="btn btn-danger btn-sm" data-i18n="test.finish"></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="test-layout animate-fade-in">
+      
+      <!-- LEFT PANEL: TEST AREA -->
+      <div class="card" style="display: flex; flex-direction: column;">
+        <!-- Top bar with progress and section title -->
+        <div class="test-header-bar">
+          <div>
+            <span class="lvl-badge lvl-badge-B1" id="question-category-label">Grammatika</span>
+            <span style="margin-left: 10px; color: var(--text-secondary); font-size: 0.9rem;" id="question-number-label">Savol: 1 / 30 / Question: 1 / 30 / Вопрос: 1 / 30</span>
+          </div>
+          <div style="font-weight: 500;" id="question-difficulty-label">Daraja: A1 / Level: A1 / Уровень: A1</div>
+        </div>
+
+        <!-- Progress bar indicator -->
+        <div class="progress-container">
+          <div class="progress-fill" id="test-progress-bar"></div>
+        </div>
+
+        <!-- Question contents -->
+        <div style="flex-grow: 1;">
+          <!-- Reading passage (if applicable) -->
+          <div id="reading-passage-container" class="passage-box" style="display: none;">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Question prompt text -->
+          <div class="question-text" id="question-prompt">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Multiple choice list -->
+          <ul class="options-list" id="question-options">
+            <!-- Rendered by JS -->
+          </ul>
+        </div>
+
+        <!-- Navigation buttons -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 20px; margin-top: 20px;">
+          <button class="btn btn-secondary" id="btn-prev-question" onclick="goToPreviousQuestion()">Oldingisi</button>
+          <button class="btn btn-primary" id="btn-next-question" onclick="goToNextQuestion()">Keyingisi</button>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL: SIDEBAR STATS & NAV -->
+      <div class="test-sidebar">
+        <!-- Timer -->
+        <div class="timer-box">
+          <div class="timer-label" data-i18n="test.timeLeft"></div>
+          <div id="test-timer-clock">25:00</div>
+        </div>
+
+        <!-- Navigation map -->
+        <div class="card">
+          <h4 style="margin-bottom: 12px; font-size: 1rem;" data-i18n="test.map"></h4>
+          <div class="question-nav-grid" id="question-nav-dots">
+            <!-- Rendered by JS -->
+          </div>
+          <div style="display: flex; gap: 15px; margin-top: 20px; font-size: 0.75rem; justify-content: center;">
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span style="width: 10px; height: 10px; border-radius: 2px; background-color: var(--primary); display: inline-block;"></span>
+              <span data-i18n="test.current"></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span style="width: 10px; height: 10px; border-radius: 2px; background-color: var(--primary-glow); display: inline-block; border: 1px solid var(--primary);"></span>
+              <span data-i18n="test.answered"></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span style="width: 10px; height: 10px; border-radius: 2px; background-color: var(--bg-card); display: inline-block; border: 1px solid var(--border-color);"></span>
+              <span data-i18n="test.unanswered"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FINISH CONFIRMATION MODAL -->
+  <div class="modal" id="finish-confirm-modal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+      <h3 style="margin-bottom: 15px;" data-i18n="test.finishModalTitle"></h3>
+      <p style="color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem;" data-i18n="test.finishModalText"></p>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button class="btn btn-secondary" onclick="closeFinishConfirmation()" data-i18n="test.cancel"></button>
+        <button class="btn btn-primary" onclick="submitTestResults()" data-i18n="test.confirmFinish"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTO-FINISH ALERT MODAL -->
+  <div class="modal" id="time-up-modal">
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+      <h3 style="margin-bottom: 15px; color: var(--danger);" data-i18n="test.timeUpTitle"></h3>
+      <p style="color: var(--text-secondary); margin-bottom: 25px; font-size: 0.95rem;" data-i18n="test.timeUpText"></p>
+      <button class="btn btn-primary" style="width: 100%;" onclick="submitTestResults(true)" data-i18n="test.viewResults"></button>
+    </div>
+  </div>
+
+</body>
+</html>
+

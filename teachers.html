@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark" data-page-title="titles.teachers">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O'qituvchilar — LevelX</title>
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/levels-colors.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  <link rel="stylesheet" href="../css/lessons.css">
+  <script src="../js/theme-toggle.js" defer></script>
+  <script src="../js/questions-data.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/lessons-data.js" defer></script>
+  <script src="../js/teachers.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="container navbar">
+    <a href="../index.html" class="logo">
+      <div class="logo-icon">EN</div><span>LevelX</span>
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="../index.html" data-i18n="nav.home"></a></li>
+        <li><a href="lessons.html" data-i18n="nav.lessons"></a></li>
+        <li><a href="teachers.html" class="active" data-i18n="nav.teachers"></a></li>
+        <li><a href="levels.html" data-i18n="nav.levels"></a></li>
+        <li><a href="stats.html" data-i18n="nav.stats"></a></li>
+        <li class="admin-only" style="display:none"><a href="admin.html" data-i18n="nav.admin"></a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <div class="lang-switcher" data-lang-switcher>
+        <button class="lang-btn" data-lang="uz">UZ</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+      </div>
+      <button class="theme-toggle" aria-label="Toggle theme"></button>
+      <div id="auth-buttons-container"></div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- Hero -->
+  <div class="teachers-hero reveal">
+    <span class="section-kicker">👨‍🏫 O'qituvchilar</span>
+    <h1>LevelX <span class="gradient-text">Ekspert o'qituvchilari</span></h1>
+    <p>Eng yaxshi ingliz tili mutaxassislaridan bevosita o'rganing. Har bir o'qituvchi sertifikatlangan CEFR metodologiyasi asosida dars beradi.</p>
+  </div>
+
+  <!-- Teachers Grid -->
+  <div class="teachers-grid" id="teachers-grid">
+    <!-- Skeleton -->
+    <div class="teacher-card-skeleton glass-card"></div>
+    <div class="teacher-card-skeleton glass-card"></div>
+    <div class="teacher-card-skeleton glass-card"></div>
+  </div>
+
+  <!-- Teacher Detail Modal -->
+  <div class="modal teacher-modal" id="teacher-modal">
+    <div class="modal-content teacher-modal-content">
+      <button class="modal-close" id="teacher-modal-close">&times;</button>
+
+      <div class="teacher-modal-hero" id="teacher-modal-hero">
+        <div class="teacher-modal-avatar" id="tmodal-avatar">👨‍🏫</div>
+        <div class="teacher-modal-info">
+          <h2 id="tmodal-name">O'qituvchi</h2>
+          <p id="tmodal-bio">Bio yuklanmoqda...</p>
+          <div class="teacher-modal-stats">
+            <div class="tstat"><span id="tmodal-lessons">0</span><small>Darslar</small></div>
+            <div class="tstat"><span id="tmodal-views">0</span><small>Ko'rishlar</small></div>
+            <div class="tstat"><span id="tmodal-students">0</span><small>O'quvchilar</small></div>
+          </div>
+          <a class="btn btn-primary" id="tmodal-yt-btn" href="#" target="_blank">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-2.75 12.08 12.08 0 01-.56-2.41A12.08 12.08 0 0112 2a12 12 0 00-12 12 12 12 0 0012 12 12 12 0 0012-12 11.87 11.87 0 00-.41-3.31zM10 15.5v-7l6 3.5z"/>
+            </svg>
+            YouTube kanalga o'tish
+          </a>
+        </div>
+      </div>
+
+      <div class="teacher-modal-courses">
+        <h3>📚 Barcha kurslar va darslar</h3>
+        <div class="teacher-lessons-grid" id="tmodal-lessons-grid"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container footer-content">
+    <div class="logo">
+      <div class="logo-icon" style="width:30px;height:30px;font-size:1rem">EN</div>
+      <span>LevelX</span>
+    </div>
+    <p>&copy; 2026 LevelX Project. <span data-i18n="hero.footer"></span></p>
+    <ul class="footer-links">
+      <li><a href="../index.html">Bosh sahifa</a></li>
+      <li><a href="lessons.html">Darslar</a></li>
+      <li><a href="teachers.html">O'qituvchilar</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>

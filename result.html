@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="uz" data-theme="light" data-page-title="titles.result">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Natijasi - LevelX</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/levels-colors.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  
+  <!-- html2pdf.js library from CDN for certificate exports -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" defer></script>
+  
+  <!-- Core JS scripts -->
+  <script src="../js/theme-toggle.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/result.js" defer></script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">EN</div>
+        <span>LevelX</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html" data-i18n="nav.home"></a></li>
+          <li><a href="levels.html" data-i18n="nav.levels"></a></li>
+          <li><a href="stats.html" data-i18n="nav.stats"></a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switcher" data-lang-switcher>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+        <button class="theme-toggle" aria-label="Mavzuni o'zgartirish / Change theme / Сменить тему"></button>
+        <a href="profile.html" class="btn btn-secondary btn-sm" id="result-profile-nav-btn" data-i18n="nav.profile"></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="animate-fade-in" style="max-width: 800px; margin: 40px auto;">
+      
+      <!-- Results Badge Header -->
+      <div class="result-header">
+        <p style="text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600; font-size: 0.9rem;" data-i18n="result.title"></p>
+        <div class="result-badge-large" id="result-cefr-level-badge">A1</div>
+        <h2 id="result-cefr-title">Boshlang'ich (Beginner)</h2>
+        <p style="margin-top: 10px; font-size: 1.1rem; color: var(--text-secondary);" id="result-score-summary" data-i18n="result.summary"></p>
+      </div>
+
+      <!-- Skill Breakdown -->
+      <div class="card breakdown-card">
+        <h3 style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;" data-i18n="result.breakdown"></h3>
+        
+        <!-- Grammar Breakdown -->
+        <div class="breakdown-row">
+          <div class="breakdown-info">
+            <span>Grammatika (Grammar)</span>
+            <span id="pct-grammar-label">0%</span>
+          </div>
+          <div class="progress-bar-small">
+            <div class="progress-bar-fill" id="bar-grammar"></div>
+          </div>
+        </div>
+
+        <!-- Vocabulary Breakdown -->
+        <div class="breakdown-row">
+          <div class="breakdown-info">
+            <span>So'z Boyligi (Vocabulary)</span>
+            <span id="pct-vocab-label">0%</span>
+          </div>
+          <div class="progress-bar-small">
+            <div class="progress-bar-fill" id="bar-vocab"></div>
+          </div>
+        </div>
+
+        <!-- Reading Breakdown -->
+        <div class="breakdown-row">
+          <div class="breakdown-info">
+            <span>O'qib Tushunish (Reading)</span>
+            <span id="pct-reading-label">0%</span>
+          </div>
+          <div class="progress-bar-small">
+            <div class="progress-bar-fill" id="bar-reading"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Panel -->
+      <div style="display: flex; gap: 15px; margin-top: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="test.html" class="btn btn-primary" data-i18n="result.retake"></a>
+        <a href="profile.html" class="btn btn-secondary" data-i18n="result.profile"></a>
+        <button onclick="downloadCertificatePDF()" class="btn btn-accent" id="btn-download-cert">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span data-i18n="result.download"></span>
+        </button>
+      </div>
+
+      <!-- Recommendations Box -->
+      <div class="recommendations-box">
+        <h3 id="recommendations-title" style="color: var(--primary);" data-i18n="result.recommendations"></h3>
+        <p id="recommendations-desc" style="margin-top: 8px; color: var(--text-secondary);" data-i18n="result.recommendationsText"></p>
+        <ul class="recommendation-list" id="recommendations-items">
+          <!-- Rendered by JS -->
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- HIDDEN CERTIFICATE PRINT LAYOUT -->
+  <div id="certificate-template">
+    <div style="border: 2px solid #0ea5e9; padding: 30px; border-radius: 4px; position: relative;">
+      
+      <!-- Watermark / Background elements -->
+      <div style="font-size: 8rem; position: absolute; opacity: 0.04; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; font-weight: 800;">CEFR</div>
+      
+      <div style="font-size: 1.8rem; font-weight: 800; color: #0369a1; letter-spacing: 0.1em; text-transform: uppercase;">
+        LevelX Certificate
+      </div>
+      <div style="font-size: 0.9rem; color: #64748b; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 5px;">
+        Ingliz tili darajasini aniqlash sertifikati
+      </div>
+      
+      <hr style="border: 0; border-top: 1px solid #e2e8f0; width: 60%; margin: 30px auto;">
+      
+      <div style="font-size: 1.1rem; color: #475569;">
+        Ushbu guvohnoma til ko'nikmalarini baholash testidan o'tgan
+      </div>
+      
+      <div style="font-size: 2.2rem; font-weight: 700; color: #0f172a; margin: 20px 0; font-family: var(--font-title);" id="cert-user-name">
+        Ali Valiyev
+      </div>
+      
+      <div style="font-size: 1.1rem; color: #475569; max-width: 500px; margin: 0 auto 30px auto;">
+        nomli foydalanuvchiga topshirildi. U topshirgan savollar tahlili natijalariga ko'ra quyidagi CEFR darajasini egalladi:
+      </div>
+      
+      <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 30px;">
+        <span id="cert-cefr-badge" style="font-size: 3.5rem; font-weight: 800; padding: 10px 30px; border-radius: 8px; color: #ffffff; background-color: #2563eb; line-height: 1;">B1</span>
+        <div style="text-align: left;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: #0f172a;" id="cert-level-title">Intermediate</div>
+          <div style="font-size: 0.85rem; color: #64748b;">Umumiy ball: <strong id="cert-total-score">15 / 30</strong></div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-top: 1px solid #e2e8f0; padding-top: 20px; max-width: 500px; margin: 0 auto;">
+        <div>
+          <div style="font-size: 0.8rem; color: #64748b; text-transform: uppercase;">Grammatika</div>
+          <div style="font-size: 1.2rem; font-weight: 700; color: #0ea5e9;" id="cert-grammar-pct">50%</div>
+        </div>
+        <div>
+          <div style="font-size: 0.8rem; color: #64748b; text-transform: uppercase;">So'z boyligi</div>
+          <div style="font-size: 1.2rem; font-weight: 700; color: #0ea5e9;" id="cert-vocab-pct">45%</div>
+        </div>
+        <div>
+          <div style="font-size: 0.8rem; color: #64748b; text-transform: uppercase;">O'qish</div>
+          <div style="font-size: 1.2rem; font-weight: 700; color: #0ea5e9;" id="cert-reading-pct">60%</div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.85rem; color: #64748b;">
+        <div style="text-align: left;">
+          <div>Platforma: <strong>LevelX.uz</strong></div>
+          <div id="cert-date">Sana: 2026-07-07</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="border-top: 1px solid #94a3b8; width: 150px; margin-bottom: 5px;"></div>
+          <div>Imtihon komissiyasi muhr o'rni</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2026 LevelX Project. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="uz" data-theme="light" data-page-title="titles.profile">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mening Profilim - LevelX</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/levels-colors.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  
+  <!-- Chart.js from CDN for premium progress charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  
+  <!-- Core JS scripts -->
+  <script src="../js/theme-toggle.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/i18n.js" defer></script>
+  <script src="../js/profile.js" defer></script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">EN</div>
+        <span>LevelX</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html" data-i18n="nav.home"></a></li>
+          <li><a href="levels.html" data-i18n="nav.levels"></a></li>
+          <li><a href="stats.html" data-i18n="nav.stats"></a></li>
+          <li class="admin-only" style="display: none;"><a href="admin.html" data-i18n="nav.admin"></a></li>
+        </ul>
+      </nav>
+      
+      <div class="nav-actions">
+        <div class="lang-switcher" data-lang-switcher>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+        <button class="theme-toggle" aria-label="Mavzuni o'zgartirish / Change theme / Сменить тему"></button>
+        <button id="profile-logout-btn" class="btn btn-danger btn-sm" data-i18n="nav.logout"></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="profile-grid animate-fade-in">
+      
+      <!-- LEFT COLUMN: USER INFO & SETTINGS -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- User Info Card -->
+        <div class="card profile-card">
+          <div id="profile-avatar-container">
+            <!-- Rendered by JS -->
+          </div>
+          <div class="profile-info">
+            <h3 id="user-full-name">Yuklanmoqda...</h3>
+            <p id="user-email" style="color: var(--text-secondary); font-size: 0.9rem;"></p>
+            <p id="user-age" style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;"></p>
+            <div style="margin-top: 15px;">
+              <span class="lvl-badge" id="user-cefr-badge">A1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Card -->
+        <div class="card">
+          <h3 style="margin-bottom: 20px;">Sozlamalar / Settings / Настройки</h3>
+          <div id="settings-alert" style="display: none; padding: 10px; border-radius: var(--border-radius-md); margin-bottom: 15px; font-size: 0.9rem;"></div>
+          
+          <form id="form-settings" onsubmit="handleSettingsUpdate(event)">
+            <div class="form-group">
+              <label for="settings-firstname" data-i18n="auth.firstName"></label>
+              <input type="text" id="settings-firstname" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="settings-lastname" data-i18n="auth.lastName"></label>
+              <input type="text" id="settings-lastname" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-age" data-i18n="auth.age"></label>
+              <input type="number" id="settings-age" class="form-control" min="5" max="120" required>
+            </div>
+
+            <!-- Avatar selector in settings -->
+            <div class="form-group">
+              <label data-i18n="profile.avatar"></label>
+              <div class="avatar-selector">
+                <div class="avatar-option" data-avatar="avatar_1" onclick="selectSettingsAvatar('avatar_1')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-b1);">👤</div>
+                </div>
+                <div class="avatar-option" data-avatar="avatar_2" onclick="selectSettingsAvatar('avatar_2')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-a2);">🧑</div>
+                </div>
+                <div class="avatar-option" data-avatar="avatar_3" onclick="selectSettingsAvatar('avatar_3')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-b2);">👩‍💻</div>
+                </div>
+                <div class="avatar-option" data-avatar="avatar_4" onclick="selectSettingsAvatar('avatar_4')">
+                  <div class="avatar-img-placeholder" style="background-color: var(--level-c1);">🧑‍🎓</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top: 15px;">
+              <label for="settings-password" data-i18n="profile.newPassword"></label>
+              <input type="password" id="settings-password" class="form-control" placeholder="O'zgartirmaslik uchun bo'sh qoldiring" minlength="6">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm" style="width: 100%; margin-top: 10px;" data-i18n="common.save"></button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: HISTORY & PROGRESS GRAPH -->
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        
+        <!-- Progress Graph Card -->
+        <div class="card">
+          <h3 data-i18n="profile.chartTitle"></h3>
+          <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 10px;" data-i18n="profile.chartSubtitle"></p>
+          <div class="profile-chart-container">
+            <canvas id="progressChart"></canvas>
+            <div id="no-chart-data-message" style="display: none; height: 100%; align-items: center; justify-content: center; color: var(--text-muted); font-weight: 500;">
+              Grafikni chizish uchun kamida bitta test topshirishingiz kerak.
+            </div>
+          </div>
+        </div>
+
+        <!-- Test History List -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 data-i18n="profile.historyTitle"></h3>
+            <a href="test.html" class="btn btn-primary btn-sm" data-i18n="profile.newTest"></a>
+          </div>
+          
+          <div id="test-history-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2026 LevelX Project. Barcha huquqlar himoyalangan.</p>
+    </div>
+  </footer>
+
+  <style>
+    /* Styling for the avatars selector since there are no images */
+    .avatar-img-placeholder {
+      font-size: 2.2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .profile-avatar-large {
+      font-size: 4rem;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 10px;
+    }
+  </style>
+</body>
+</html>
+
