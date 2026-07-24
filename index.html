@@ -1,0 +1,424 @@
+﻿<!DOCTYPE html>
+<html lang="uz" data-theme="dark" data-page-title="titles.home">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LevelX | Premium CEFR English Placement Test</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/levels-colors.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/pages.css">
+  
+  <!-- Core JS scripts (loaded in head to avoid styling flashes) -->
+  <script src="js/theme-toggle.js" defer></script>
+  <script src="js/questions-data.js" defer></script>
+  <script src="js/state.js" defer></script>
+  <script src="js/i18n.js" defer></script>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">EN</div>
+        <span>LevelX</span>
+      </a>
+      
+      <nav>
+        <ul class="nav-links" id="nav-links-menu">
+          <li><a href="index.html" class="active" data-i18n="nav.home"></a></li>
+          <li><a href="pages/levels.html" data-i18n="nav.levels"></a></li>
+          <li><a href="pages/stats.html" data-i18n="nav.stats"></a></li>
+          <li class="admin-only" style="display: none;"><a href="pages/admin.html" data-i18n="nav.admin"></a></li>
+        </ul>
+      </nav>
+      
+      <div class="nav-actions">
+        <div class="lang-switcher" data-lang-switcher>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+        </div>
+        <button class="theme-toggle" aria-label="Mavzuni o'zgartirish"></button>
+        <div id="auth-buttons-container">
+          <!-- Populated by JS -->
+          <a href="pages/auth.html" class="btn btn-secondary btn-sm" data-i18n="nav.login"></a>
+          <a href="pages/auth.html?tab=signup" class="btn btn-primary btn-sm" data-i18n="nav.signup"></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero container reveal">
+      <div class="hero-badge" data-i18n="hero.badge"></div>
+      <div class="hero-copy">
+        <h1 data-i18n="hero.title"></h1>
+        <p data-i18n="hero.subtitle"></p>
+      </div>
+
+      <div class="hero-actions">
+        <a href="pages/test.html" class="btn btn-primary btn-lg" id="start-test-hero-btn" data-i18n="hero.start"></a>
+        <a href="pages/levels.html" class="btn btn-secondary btn-lg" data-i18n="hero.levels"></a>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-dashboard glass-card">
+          <div class="dashboard-top">
+            <span class="dashboard-label">Placement score</span>
+            <span class="dashboard-pill">Live</span>
+          </div>
+          <div class="dashboard-score">82%</div>
+          <div class="dashboard-grid">
+            <div><strong>Grammar</strong><span>9/10</span></div>
+            <div><strong>Reading</strong><span>8/10</span></div>
+            <div><strong>Vocabulary</strong><span>7/10</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-orb hero-orb-main"></div>
+          <div class="hero-orb hero-orb-secondary"></div>
+          <div class="floating-element floating-a">A1</div>
+          <div class="floating-element floating-b">B2</div>
+          <div class="floating-element floating-c">C2</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">CEFR levels</span>
+        <h2>From A1 to C2, mapped with clarity.</h2>
+        <p>Each stage is presented as a refined, intuitive step toward confident communication.</p>
+      </div>
+      <div class="grid-3">
+        <article class="glass-card level-card lvl-card-A2">
+          <div class="card-head"><span class="level-pill lvl-badge-A2">A1</span><span>Starter</span></div>
+          <h3>Everyday basics</h3>
+          <p>Understand simple phrases, daily questions, and core vocabulary with ease.</p>
+        </article>
+        <article class="glass-card level-card lvl-card-B1">
+          <div class="card-head"><span class="level-pill lvl-badge-B1">A2</span><span>Foundation</span></div>
+          <h3>Everyday conversations</h3>
+          <p>Handle familiar topics and navigate routine situations without hesitation.</p>
+        </article>
+        <article class="glass-card level-card lvl-card-B2">
+          <div class="card-head"><span class="level-pill lvl-badge-B2">B1</span><span>Independent</span></div>
+          <h3>Stronger self-expression</h3>
+          <p>Discuss ideas clearly and understand the main points of common materials.</p>
+        </article>
+        <article class="glass-card level-card lvl-card-C1">
+          <div class="card-head"><span class="level-pill lvl-badge-C1">B2</span><span>Confident</span></div>
+          <h3>Complex thinking</h3>
+          <p>Engage with more demanding topics and express nuanced opinions effectively.</p>
+        </article>
+        <article class="glass-card level-card lvl-card-C2">
+          <div class="card-head"><span class="level-pill lvl-badge-C2">C1</span><span>Advanced</span></div>
+          <h3>Professional fluency</h3>
+          <p>Read, respond, and adapt across academic and professional environments.</p>
+        </article>
+        <article class="glass-card level-card lvl-card-C2">
+          <div class="card-head"><span class="level-pill lvl-badge-C2">C2</span><span>Near-native</span></div>
+          <h3>Masterful command</h3>
+          <p>Handle subtle meaning, nuance, and complex ideas with precision and ease.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">Features</span>
+        <h2>Designed to feel fast, calm, and intelligent.</h2>
+      </div>
+      <div class="grid-3">
+        <article class="glass-card feature-card">
+          <div class="feature-icon">✦</div>
+          <h3>Fast assessment</h3>
+          <p>Move through a focused placement flow that feels effortless and well-paced.</p>
+        </article>
+        <article class="glass-card feature-card">
+          <div class="feature-icon">◎</div>
+          <h3>Clear insight</h3>
+          <p>See section-by-section feedback and understand your next best step instantly.</p>
+        </article>
+        <article class="glass-card feature-card">
+          <div class="feature-icon">↗</div>
+          <h3>Track your growth</h3>
+          <p>Keep your results in a polished profile and build momentum over time.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="stats-grid">
+        <div class="stat-card glass-card">
+          <strong class="stat-number" data-target="50000">0</strong>
+          <span>active learners</span>
+        </div>
+        <div class="stat-card glass-card">
+          <strong class="stat-number" data-target="20000">0</strong>
+          <span>certificates issued</span>
+        </div>
+        <div class="stat-card glass-card">
+          <strong class="stat-number" data-target="4.9">0</strong>
+          <span>average rating</span>
+        </div>
+        <div class="stat-card glass-card">
+          <strong class="stat-number" data-target="120">0</strong>
+          <span>countries reached</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">How it works</span>
+        <h2>Three elegant steps to your result.</h2>
+      </div>
+      <div class="steps-grid">
+        <article class="glass-card step-card">
+          <div class="step-number">1</div>
+          <h3>Begin the test</h3>
+          <p>Start a focused placement experience that takes only a few minutes.</p>
+        </article>
+        <article class="glass-card step-card">
+          <div class="step-number">2</div>
+          <h3>Review your profile</h3>
+          <p>See your strengths, weaknesses, and CEFR direction in one place.</p>
+        </article>
+        <article class="glass-card step-card">
+          <div class="step-number">3</div>
+          <h3>Download your certificate</h3>
+          <p>Celebrate your progress with a polished result you can share.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">Testimonials</span>
+        <h2>Trusted by learners who value clarity.</h2>
+      </div>
+      <div class="grid-3">
+        <article class="glass-card testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“The experience feels premium and calm. I understood my level immediately.”</p>
+          <strong>— Malika, B1</strong>
+        </article>
+        <article class="glass-card testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“Beautiful, fast, and surprisingly motivating. It felt effortless to use.”</p>
+          <strong>— Jamshid, B2</strong>
+        </article>
+        <article class="glass-card testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>“It helped me see my next step clearly and made practice feel exciting.”</p>
+          <strong>— Diyor, C1</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="section-heading">
+        <span class="section-kicker">FAQ</span>
+        <h2>Everything you need to know.</h2>
+      </div>
+      <div class="faq-list">
+        <details class="glass-card faq-item">
+          <summary>Is the test free?</summary>
+          <p>Yes. The core placement experience is free and easy to start.</p>
+        </details>
+        <details class="glass-card faq-item">
+          <summary>How long does it take?</summary>
+          <p>Most learners finish in around 30 minutes, though you can move at your own pace.</p>
+        </details>
+        <details class="glass-card faq-item">
+          <summary>Can I download my certificate?</summary>
+          <p>Absolutely. Your result is available as a polished PDF certificate after completion.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="logo">
+        <div class="logo-icon" style="width: 30px; height: 30px; font-size: 1rem;">EN</div>
+        <span>LevelX</span>
+      </div>
+      <p>&copy; 2026 LevelX Project. <span data-i18n="hero.footer"></span></p>
+      <ul class="footer-links">
+        <li><a href="index.html">Bosh sahifa</a></li>
+        <li><a href="pages/levels.html">Darajalar</a></li>
+        <li><a href="pages/stats.html">Statistika</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <div class="cursor-glow" id="cursor-glow"></div>
+  <div class="page-transition-overlay" id="page-transition-overlay"></div>
+  <div class="floating-particles" id="floating-particles" aria-hidden="true"></div>
+
+  <!-- Page Logic Setup script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic Auth UI Adjustments
+      const currentUser = State.getCurrentUser();
+      const authContainer = document.getElementById('auth-buttons-container');
+      const startTestBtn = document.getElementById('start-test-hero-btn');
+      
+      // Admin menu item visibility
+      if (currentUser && currentUser.email === 'admin@test.com') {
+        document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'block');
+      }
+
+      if (currentUser) {
+        // Logged in
+        authContainer.innerHTML = `
+          <a href="pages/profile.html" class="nav-avatar-pill" aria-label="Profil">
+            <span class="nav-avatar-badge">${currentUser.firstName.charAt(0).toUpperCase()}</span>
+            <span class="nav-avatar-name">${currentUser.firstName}</span>
+          </a>
+          <button id="logout-action-btn" class="btn btn-danger btn-sm">${window.i18n.t('nav.logout')}</button>
+        `;
+
+        document.getElementById('logout-action-btn').addEventListener('click', () => {
+          State.logout();
+          window.location.reload();
+        });
+      } else {
+        // Not logged in -> point test starting to auth registration
+        startTestBtn.href = "pages/auth.html?redirect=test";
+        
+        // Setup a temporary mock admin if no users registered yet
+        const users = State.getAllUsers();
+        if (users.length === 0) {
+          // pre-register default admin
+          State.register("Admin", "System", "admin@test.com", "admin123", 30, "avatar_3");
+          // pre-register default normal user
+          State.register("Eldor", "Karimov", "eldor@test.com", "eldor123", 22, "avatar_1");
+          // Add some mock test history for Eldor to make stats / charts look beautiful
+          const eldorUser = State.login("eldor@test.com", "eldor123").user;
+          State.createSession(eldorUser.id);
+          State.addTestResult(5, 30, "A1", {
+            grammar: { correct: 2, total: 10 },
+            vocabulary: { correct: 2, total: 10 },
+            reading: { correct: 1, total: 10 }
+          });
+          State.addTestResult(12, 30, "B1", {
+            grammar: { correct: 5, total: 10 },
+            vocabulary: { correct: 4, total: 10 },
+            reading: { correct: 3, total: 10 }
+          });
+          State.addTestResult(18, 30, "B2", {
+            grammar: { correct: 7, total: 10 },
+            vocabulary: { correct: 6, total: 10 },
+            reading: { correct: 5, total: 10 }
+          });
+          State.logout(); // log back out
+        }
+      }
+
+      // Navbar scroll state
+      const header = document.querySelector('header');
+      const toggleHeader = () => header.classList.toggle('scrolled', window.scrollY > 12);
+      toggleHeader();
+      window.addEventListener('scroll', toggleHeader, { passive: true });
+
+      // Reveal-on-scroll animation
+      const reveals = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach((item) => revealObserver.observe(item));
+
+      // Cursor glow effect
+      const cursorGlow = document.getElementById('cursor-glow');
+      window.addEventListener('pointermove', (event) => {
+        cursorGlow.style.transform = `translate(${event.clientX - 120}px, ${event.clientY - 120}px)`;
+      });
+
+      // Floating particles
+      const particleLayer = document.getElementById('floating-particles');
+      for (let i = 0; i < 18; i += 1) {
+        const particle = document.createElement('span');
+        particle.className = 'particle';
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 4}s`;
+        particle.style.animationDuration = `${5 + Math.random() * 5}s`;
+        particleLayer.appendChild(particle);
+      }
+
+      // Animated counters
+      const counters = document.querySelectorAll('.stat-number');
+      const formatCount = (value, isDecimal) => {
+        if (isDecimal) {
+          return `${value.toFixed(1)}`;
+        }
+        return `${Math.round(value).toLocaleString('uz-UZ')}+`;
+      };
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = parseFloat(entry.target.dataset.target);
+            const isDecimal = Number.isInteger(target) === false;
+            let current = 0;
+            const step = target / 60;
+            const tick = () => {
+              current += step;
+              if (current >= target) {
+                entry.target.textContent = formatCount(target, isDecimal);
+                counterObserver.unobserve(entry.target);
+                return;
+              }
+              entry.target.textContent = formatCount(current, isDecimal);
+              requestAnimationFrame(tick);
+            };
+            tick();
+          }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach((counter) => counterObserver.observe(counter));
+
+      // Button ripple effect
+      document.querySelectorAll('.btn').forEach((button) => {
+        button.addEventListener('click', (event) => {
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          const rect = button.getBoundingClientRect();
+          ripple.style.left = `${event.clientX - rect.left}px`;
+          ripple.style.top = `${event.clientY - rect.top}px`;
+          button.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 700);
+        });
+      });
+
+      // Smooth page transition on internal navigation
+      document.querySelectorAll('a[href]').forEach((anchor) => {
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http')) return;
+        anchor.addEventListener('click', (event) => {
+          if (event.ctrlKey || event.metaKey || event.shiftKey) return;
+          const overlay = document.getElementById('page-transition-overlay');
+          overlay.classList.add('active');
+          setTimeout(() => {
+            window.location.href = href;
+          }, 220);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
